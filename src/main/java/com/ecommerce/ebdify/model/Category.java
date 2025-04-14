@@ -2,6 +2,7 @@ package com.ecommerce.ebdify.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class Category {
     private Long categoryId;
 
     @NotBlank
+    @Size(min = 5, message = "Category name must be at least 5 characters long.")
     @Column(name = "category_name")
     private String categoryName;
 }
