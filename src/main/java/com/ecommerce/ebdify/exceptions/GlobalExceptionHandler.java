@@ -1,5 +1,6 @@
 package com.ecommerce.ebdify.exceptions;
 
+import com.ecommerce.ebdify.models.dtos.response.APIResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -27,19 +28,21 @@ public class GlobalExceptionHandler {
 
     // to get more clear exception message if a particular resource is not found
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<String> myResourceNotFoundException(
+    public ResponseEntity<APIResponse> myResourceNotFoundException(
             ResourceNotFoundException e) {
         String message = e.getMessage();
-        return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        APIResponse apiResponse = new APIResponse(false, message);
+        return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
     }
 
-    // to get more clear exception message when a category already exists with same name,
+    // To get more clear exception message when a category already exists with same name,
     // also when no category is found while fetching list of categories.
     @ExceptionHandler(APIException.class)
-    public ResponseEntity<String> myAPIException(
+    public ResponseEntity<APIResponse> myAPIException(
             APIException e) {
         String message = e.getMessage();
-        return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        APIResponse apiResponse = new APIResponse(false, message);
+        return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
     }
 
 }

@@ -7,5 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class EbdifyApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EbdifyApplication.class, args);
+		System.out.println("Ebdify: Shop Smart!");
 	}
 }
