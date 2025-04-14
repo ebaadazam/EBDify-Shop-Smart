@@ -1,14 +1,14 @@
 package com.ecommerce.ebdify.service;
 
-import com.ecommerce.ebdify.model.Category;
-import java.util.List;
+import com.ecommerce.ebdify.models.dtos.request.CategoryDTO;
+import com.ecommerce.ebdify.models.dtos.response.CategoryResponse;
 
 public interface CategoryService {
-    List<Category> getAllCategories();
+    CategoryResponse getAllCategories(Integer pageNumber, Integer pageSize, String sortBy, String sortByOrder);
 
-    void createCategory(Category category);
+    CategoryDTO createCategory(CategoryDTO categoryDTO);
 
-    Category updateCategory(Category category, Long categoryId);
+    CategoryDTO updateCategory(CategoryDTO categoryDTO, Long categoryId);
 
-    void deleteCategory(Long categoryId);
+    CategoryDTO deleteCategory(Long categoryId);
 }

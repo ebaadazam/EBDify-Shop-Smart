@@ -1,4 +1,4 @@
-package com.ecommerce.ebdify.model;
+package com.ecommerce.ebdify.models.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
