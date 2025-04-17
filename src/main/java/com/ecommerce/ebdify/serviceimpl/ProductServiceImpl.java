@@ -134,7 +134,7 @@ public class ProductServiceImpl implements ProductService {
                 .toList();
 
         if (products.isEmpty()) {
-            throw new APIException("No products found!");
+            throw new APIException("Product with category " + category.getCategoryName() + " not found!");
         }
 
         ProductResponse productResponse = new ProductResponse();
@@ -170,7 +170,7 @@ public class ProductServiceImpl implements ProductService {
                 .toList();
 
         if (products.isEmpty()) {
-            throw new APIException("No products found!");
+            throw new APIException("No products found with keyword: " + keyword);
         }
 
         ProductResponse productResponse = new ProductResponse();
