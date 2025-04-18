@@ -222,7 +222,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findById(productId)
                 .orElseThrow(()->new ResourceNotFoundException("Product", "productId", productId));
 
-        // Upload the image to the server (codebase) and get the file name of the uploaded image
+        // Upload the image to the server (codebase) with path and image and store this in the file name of the uploaded image
         String fileName = fileService.uploadImage(path, image);
 
         // Updating the new file name to the product
