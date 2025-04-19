@@ -1,4 +1,4 @@
-package com.ecommerce.ebdify.security.jwt;
+package com.ecommerce.ebdify.security.request;
 
 import lombok.Getter;
 import lombok.Setter;
