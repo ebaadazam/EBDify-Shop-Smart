@@ -1,6 +1,7 @@
 package com.ecommerce.ebdify.controller;
 
 import com.ecommerce.ebdify.models.dtos.request.CartDTO;
+import com.ecommerce.ebdify.models.dtos.request.CartItemDTO;
 import com.ecommerce.ebdify.models.entities.Cart;
 import com.ecommerce.ebdify.repository.CartRepository;
 import com.ecommerce.ebdify.service.CartService;
@@ -24,6 +25,12 @@ public class CartController {
 
     @Autowired
     private CartService cartService;
+
+    @PostMapping("/carts/create")
+    public ResponseEntity<String> createOrUpdateCart(@RequestParam List<CartItemDTO> cartItems){
+        String response = cartService.createOrUpdateCartWithItems(cartItems);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
 
     @PostMapping("/carts/products/{productId}/quantity/{quantity}")
     public ResponseEntity<CartDTO> addProductToCart(@PathVariable Long productId,
