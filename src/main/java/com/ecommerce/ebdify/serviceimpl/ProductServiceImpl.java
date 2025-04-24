@@ -21,6 +21,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -86,7 +87,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductResponse getAllProducts(Integer pageNumber, Integer pageSize, String sortBy, String sortByOrder) {
+    public ProductResponse getAllProducts(Integer pageNumber, Integer pageSize, String sortBy, String sortByOrder, String keyword, String category) {
         // For sorting
         Sort sortByAndOrder = sortByOrder.equalsIgnoreCase("asc")
                 ? Sort.by(sortBy).ascending()
@@ -97,8 +98,20 @@ public class ProductServiceImpl implements ProductService {
         // data from database query result
         Pageable pageDetails = PageRequest.of(pageNumber, pageSize, sortByAndOrder);
 
+        // It is an interface used to construct filters
+        Specification<Product> spec = Specification.where(null);
+        if (keyword != null && !keyword.isEmpty()) {
+            spec = spec.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.like(criteriaBuilder.lower(root.get("productName")), "%" + keyword.toLowerCase() + "%"));
+        }
+
+        if (category != null && !category.isEmpty()) {
+            spec = spec.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.like(root.get("category").get("categoryName"), category));
+        }
+
         // This will find all the results with respect to entered pageNumber & pageSize
-        Page<Product> pageProducts = productRepository.findAll(pageDetails);
+        Page<Product> pageProducts = productRepository.findAll(spec, pageDetails);
 
         List<Product> products = pageProducts.getContent();
 
