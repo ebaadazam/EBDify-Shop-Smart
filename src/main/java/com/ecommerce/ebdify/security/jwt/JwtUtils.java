@@ -53,7 +53,7 @@ public class JwtUtils {
 //    For SignOut API
     public ResponseCookie getCleanJwtCookie() {
         ResponseCookie cookie = ResponseCookie.from(jwtCookie, null)
-                .path("/api")
+                .path("/")
                 .build();
         return cookie;
     }
