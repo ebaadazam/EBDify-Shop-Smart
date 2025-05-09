@@ -26,7 +26,7 @@ public class CartController {
     @Autowired
     private CartService cartService;
 
-    @PostMapping("/carts/create")
+    @PostMapping("/cart/create")
     public ResponseEntity<String> createOrUpdateCart(@RequestParam List<CartItemDTO> cartItems){
         String response = cartService.createOrUpdateCartWithItems(cartItems);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
