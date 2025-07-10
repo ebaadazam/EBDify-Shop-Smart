@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: ebdify-backend
+    env: docker
+    plan: free
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: STRIPE_SECRET_KEY
+        sync: false   # Let Render prompt you to set this securely
+    autoDeploy: true
